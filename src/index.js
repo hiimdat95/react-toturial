@@ -1,8 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import {Provider} from 'react-redux';
+import TrackList from './components/TrackList';
+import {configureStore} from './store';
+import * as actions from './actions';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+
+const tracks = [
+  {
+    id: 1,
+    title: 'Em của ngày hôm qua'
+  },
+  {
+    id: 2,
+    title: 'Cơn mưa ngang qua'
+  }
+];
+
+const store = configureStore();
+store.dispatch(actions.setTracks(tracks));
+
+ReactDOM.render(
+    <Provider store={store}>
+        <TrackList />
+    </Provider>,
+    document.getElementById('app')
+);
