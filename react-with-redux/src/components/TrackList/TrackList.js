@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class TrackList extends Component {
-  static get propTypes() {
-    return {
-       count: React.PropTypes.number.isRequired
-    }
+  static propTypes = {
+    tracks: PropTypes.array
+  }
 
   static defaultProps = {
     tracks: []
