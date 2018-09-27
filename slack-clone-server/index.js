@@ -22,8 +22,8 @@ const app = express();
 const server = new ApolloServer({ typeDefs, resolvers });
 server.applyMiddleware({ app });
 
-models.sequelize.sync().then((x) => {
-    app.listen(8081,'localhost',() =>{
+models.sequelize.sync({ force: true }).then((x) => {
+    app.listen(8081, 'localhost', () => {
         console.log('sever start');
     });
 });
