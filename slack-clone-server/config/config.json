@@ -5,20 +5,30 @@
     "database": "SlackClone",
     "host": "127.0.0.1",
     "dialect": "mssql",
-    "timezone": "+07:00"
+    "timezone": "+07:00",
+    "define": {
+      "underscrored": true
+    }
   },
   "test": {
     "username": "sa",
     "password": "123",
     "database": "SlackClone",
     "host": "127.0.0.1",
-    "dialect": "mssql"
+    "dialect": "mssql",
+    "define": {
+      "underscrored": true
+    }
+    
   },
   "production": {
     "username": "sa",
     "password": "123",
     "database": "SlackClone",
     "host": "127.0.0.1",
-    "dialect": "mssql"
+    "dialect": "mssql",
+    "define": {
+      "underscrored": true
+    }
   }
 }

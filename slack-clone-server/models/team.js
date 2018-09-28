@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
           unique: true,
         },
       },
-      { underscored: true },
+      // { underscored: true },
     );
   
     Team.associate = (models) => {

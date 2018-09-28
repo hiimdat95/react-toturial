@@ -3,9 +3,19 @@ import bodyParser from 'body-parser';
 import { ApolloServer, gql } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import typeDefs from './schema';
-import resolvers from './resolvers';
+// import typeDefs from './schema/schema';
+// import resolvers from './resolvers';
 import models from "./models";
+
+import path from 'path';
+import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+
+const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
+
+const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './resolvers')));
+
+// export default mergeResolvers(resolvers);
+
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
@@ -15,15 +25,19 @@ const app = express();
 
 // const graphqlEndpoint = '/graphql';
 
-// app.use(graphqlEndpoint, bodyParser.json(), graphqlExpress({ schema }));
+// app.use(graphqlEndpoint, bodyParser.json(), graphqlExpress({ schema }));F
 
 // app.use('/graphiql', graphiqlExpress({ endpointURL: graphqlEndpoint }));
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+    schema, context: {
+        models,
+    }
+});
 server.applyMiddleware({ app });
 
-models.sequelize.sync({ force: true }).then((x) => {
+models.sequelize.sync({ force: false }).then((x) => {
     app.listen(8081, 'localhost', () => {
-        console.log('sever start');
+        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
     });
 });
