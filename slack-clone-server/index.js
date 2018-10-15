@@ -32,6 +32,9 @@ const app = express();
 const server = new ApolloServer({
     schema, context: {
         models,
+        user: {
+            id: 1
+        }
     }
 });
 server.applyMiddleware({ app });

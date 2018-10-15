@@ -5,6 +5,7 @@ export default {
     },
     Mutation: {
         createUser: (parent, args, { models }) => {
+            console.log(args);
             const user = models.User.create(args);
             return user;
         },
