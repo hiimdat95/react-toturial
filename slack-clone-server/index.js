@@ -33,7 +33,7 @@ const server = new ApolloServer({
     schema, context: {
         models,
         user: {
-            id: 1
+            id: 1 
         }
     }
 });
@@ -41,6 +41,6 @@ server.applyMiddleware({ app });
 
 models.sequelize.sync({ force: false }).then((x) => {
     app.listen(8081, 'localhost', () => {
-        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+        console.log(`🚀 Server ready at http://localhost:8081${server.graphqlPath}`);
     });
 });
