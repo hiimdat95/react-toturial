@@ -3,9 +3,8 @@ import bodyParser from 'body-parser';
 import { ApolloServer, gql } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 
-// import typeDefs from './schema/schema';
-// import resolvers from './resolvers';
 import models from "./models";
+import cors from 'cors'
 
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
@@ -29,11 +28,12 @@ const app = express();
 
 // app.use('/graphiql', graphiqlExpress({ endpointURL: graphqlEndpoint }));
 
+app.use(cors('*'));
 const server = new ApolloServer({
     schema, context: {
         models,
         user: {
-            id: 1 
+            id: 1
         }
     }
 });
